@@ -1,6 +1,7 @@
 package vista;
 
 import controlador.Controller;
+import modelo.Territorio;
 
 import javax.swing.*;
 import java.awt.event.MouseEvent;
@@ -16,6 +17,7 @@ public class Ventana extends JFrame {
 
     private JLabel labelMoverOrigen = new JLabel("Origen:");
     private JLabel labelMoverDestino = new JLabel("Destino:");
+    private JLabel labelMoverNumero = new JLabel("No. de Tropas");
     private JLabel labelAtacarOrigen = new JLabel("Origen:");
     private JLabel labelAtacarDestino = new JLabel("Destino:");
     private JLabel labelModuloAtaque = new JLabel("Modulo de Ataque");
@@ -26,8 +28,10 @@ public class Ventana extends JFrame {
 
     private JComboBox<String> comboMoverOrigen = new JComboBox<String>();
     private JComboBox<String> comboMoverDestino = new JComboBox<String>();
+    private JComboBox<Integer> comboMoverNumero = new JComboBox<Integer>();
     private JComboBox<String> comboAtacarOrigen = new JComboBox<String>();
     private JComboBox<String> comboAtacarDestino = new JComboBox<String>();
+
 
     //Botones
 
@@ -56,37 +60,44 @@ public class Ventana extends JFrame {
         this.add(panel);
 
         this.add(labelModuloMover);
-        this.labelModuloMover.setBounds(50,550,200,30);
+        this.labelModuloMover.setBounds(50,525,200,30);
 
         this.add(labelMoverOrigen);
-        this.labelMoverOrigen.setBounds(15,600,69,30);
-
-        this.add(comboMoverDestino);
-        this.comboMoverDestino.setBounds(100,630,150,30);
-
-        this.add(labelMoverDestino);
-        this.labelMoverDestino.setBounds(15,630,69,30);
+        this.labelMoverOrigen.setBounds(15,575,69,30);
 
         this.add(comboMoverOrigen);
-        this.comboMoverOrigen.setBounds(100,600,150,30);
+        this.comboMoverOrigen.setBounds(100,575,150,30);
+
+        this.add(labelMoverDestino);
+        this.labelMoverDestino.setBounds(15,605,69,30);
+
+        this.add(comboMoverDestino);
+        this.comboMoverDestino.setBounds(100,605,150,30);
+
+        this.add(labelMoverNumero);
+        this.labelMoverNumero.setBounds(15,635,99,30);
+
+        this.add(comboMoverNumero).setBounds(150,635,100,30);
+
+
 
         this.add(botonMoverTropas);
         this.botonMoverTropas.setBounds(40,680,150,30);
 
         this.add(labelModuloAtaque);
-        this.labelModuloAtaque.setBounds(450,550,200,30);
+        this.labelModuloAtaque.setBounds(450,525,200,30);
 
         this.add(labelAtacarOrigen);
-        this.labelAtacarOrigen.setBounds(415,600,69,30);
+        this.labelAtacarOrigen.setBounds(415,575,69,30);
 
         this.add(labelAtacarDestino);
-        this.labelAtacarDestino.setBounds(415,630,69,30);
+        this.labelAtacarDestino.setBounds(415,605,69,30);
 
         this.add(comboAtacarOrigen);
-        this.comboAtacarOrigen.setBounds(485,600,150,30);
+        this.comboAtacarOrigen.setBounds(485,575,150,30);
 
         this.add(comboAtacarDestino);
-        this.comboAtacarDestino.setBounds(485,630,150,30);
+        this.comboAtacarDestino.setBounds(485,605,150,30);
 
         this.add(botonAtacar);
         this.botonAtacar.setBounds(440,680,150,30);
@@ -102,20 +113,30 @@ public class Ventana extends JFrame {
         this.botonTerminarTurno.setBounds(675,635,150,75);
 
         this.add(botonIniciarJuego);
-        this.botonIniciarJuego.setBounds(300,500,150,30);
+        this.botonIniciarJuego.setBounds(275,500,150,30);
 
     }
 
     public void setMensaje(String s){
-        this.textoLogs.setText(s);
+        this.textoLogs.setText(this.textoLogs.getText() + "\n" + s);
     }
 
     public void setController(Controller controller){
         this.controller = controller;
         this.botonIniciarJuego.addActionListener(this.controller);
 
-        //ActionListeners Modulo de Ataque
+        //ActionListeners/ItemListeners Modulo Mover Tropas
+
+        this.comboMoverOrigen.addItemListener(this.controller);
+        this.botonMoverTropas.addActionListener(this.controller);
+
+        //ActionListeners/ItemListeners Modulo de Ataque
         this.comboAtacarOrigen.addItemListener(this.controller);
+        this.comboAtacarDestino.addItemListener(this.controller);
+        this.botonAtacar.addActionListener(this.controller);
+
+        //ActionListener Boton Terminar Turno
+
         this.botonTerminarTurno.addActionListener(this.controller);
 
 
@@ -216,4 +237,5 @@ public class Ventana extends JFrame {
     public void setComboAtacarDestino(JComboBox<String> comboAtacarDestino) {
         this.comboAtacarDestino = comboAtacarDestino;
     }
+
 }
