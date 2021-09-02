@@ -3,6 +3,9 @@ package vista;
 import controlador.Controller;
 
 import javax.swing.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 public class Ventana extends JFrame {
 
@@ -31,6 +34,7 @@ public class Ventana extends JFrame {
     private JButton botonMoverTropas = new JButton("Mover Tropas");
     private JButton botonAtacar = new JButton("Atacar!");
     private JButton botonTerminarTurno = new JButton("Terminar Turno");
+    private JButton botonIniciarJuego = new JButton("Iniciar Juego");
 
     //Ventana de Eventos
 
@@ -47,7 +51,7 @@ public class Ventana extends JFrame {
         this.setVisible(true);
     }
 
-    private void initComponents() {
+    public void initComponents() {
 
         this.add(panel);
 
@@ -97,11 +101,119 @@ public class Ventana extends JFrame {
         this.add(botonTerminarTurno);
         this.botonTerminarTurno.setBounds(675,635,150,75);
 
+        this.add(botonIniciarJuego);
+        this.botonIniciarJuego.setBounds(300,500,150,30);
+
+    }
+
+    public void setMensaje(String s){
+        this.textoLogs.setText(s);
     }
 
     public void setController(Controller controller){
         this.controller = controller;
+        this.botonIniciarJuego.addActionListener(this.controller);
+
+        //ActionListeners Modulo de Ataque
+        this.comboAtacarOrigen.addItemListener(this.controller);
+        this.botonTerminarTurno.addActionListener(this.controller);
+
 
     }
 
+    public void setCboOrigen(ArrayList<String> nombresRojos){
+
+        this.getComboAtacarOrigen().removeAllItems();
+        this.getComboMoverOrigen().removeAllItems();
+
+        for (int i = 0; i <nombresRojos.size() ; i++) {
+            this.getComboAtacarOrigen().addItem(nombresRojos.get(i));
+            this.getComboMoverOrigen().addItem(nombresRojos.get(i));
+        }
+    }
+
+    public void setCboAtacarDestino(ArrayList<String> nombresAzules){
+        this.getComboAtacarDestino().removeAllItems();
+
+        for (int i = 0; i <nombresAzules.size(); i++) {
+            this.getComboAtacarDestino().addItem(nombresAzules.get(i));
+        }
+    }
+
+    public Panel getPanel() {
+        return panel;
+    }
+
+    public void setPanel(Panel panel) {
+        this.panel = panel;
+    }
+
+    //Getters y Setters Botones
+
+    public JButton getBotonMoverTropas() {
+        return botonMoverTropas;
+    }
+
+    public void setBotonMoverTropas(JButton botonMoverTropas) {
+        this.botonMoverTropas = botonMoverTropas;
+    }
+
+    public JButton getBotonAtacar() {
+        return botonAtacar;
+    }
+
+    public void setBotonAtacar(JButton botonAtacar) {
+        this.botonAtacar = botonAtacar;
+    }
+
+    public JButton getBotonTerminarTurno() {
+        return botonTerminarTurno;
+    }
+
+    public void setBotonTerminarTurno(JButton botonTerminarTurno) {
+        this.botonTerminarTurno = botonTerminarTurno;
+    }
+
+    public JButton getBotonIniciarJuego() {
+        return botonIniciarJuego;
+    }
+
+    public void setBotonIniciarJuego(JButton botonIniciarJuego) {
+        this.botonIniciarJuego = botonIniciarJuego;
+    }
+
+    //Getters y Setters ComboBoxes
+
+
+    public JComboBox<String> getComboMoverOrigen() {
+        return comboMoverOrigen;
+    }
+
+    public void setComboMoverOrigen(JComboBox<String> comboMoverOrigen) {
+        this.comboMoverOrigen = comboMoverOrigen;
+    }
+
+    public JComboBox<String> getComboMoverDestino() {
+        return comboMoverDestino;
+    }
+
+    public void setComboMoverDestino(JComboBox<String> comboMoverDestino) {
+        this.comboMoverDestino = comboMoverDestino;
+    }
+
+    public JComboBox<String> getComboAtacarOrigen() {
+        return comboAtacarOrigen;
+    }
+
+    public void setComboAtacarOrigen(JComboBox<String> comboAtacarOrigen) {
+        this.comboAtacarOrigen = comboAtacarOrigen;
+    }
+
+    public JComboBox<String> getComboAtacarDestino() {
+        return comboAtacarDestino;
+    }
+
+    public void setComboAtacarDestino(JComboBox<String> comboAtacarDestino) {
+        this.comboAtacarDestino = comboAtacarDestino;
+    }
 }
