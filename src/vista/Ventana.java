@@ -32,7 +32,6 @@ public class Ventana extends JFrame {
     private JComboBox<String> comboAtacarOrigen = new JComboBox<String>();
     private JComboBox<String> comboAtacarDestino = new JComboBox<String>();
 
-
     //Botones
 
     private JButton botonMoverTropas = new JButton("Mover Tropas");
@@ -128,6 +127,8 @@ public class Ventana extends JFrame {
         //ActionListeners/ItemListeners Modulo Mover Tropas
 
         this.comboMoverOrigen.addItemListener(this.controller);
+        this.comboMoverDestino.addItemListener(this.controller);
+        this.comboMoverNumero.addItemListener(this.controller);
         this.botonMoverTropas.addActionListener(this.controller);
 
         //ActionListeners/ItemListeners Modulo de Ataque
@@ -153,11 +154,33 @@ public class Ventana extends JFrame {
         }
     }
 
+    public void setCboMoverDestino (ArrayList<String> destinos){
+
+        if(destinos.isEmpty()){
+
+        }
+        else{
+            this.comboMoverDestino.removeAllItems();
+            for (int i = 0; i < destinos.size(); i++) {
+                this.comboMoverDestino.addItem(destinos.get(i));
+            }
+        }
+
+    }
+
     public void setCboAtacarDestino(ArrayList<String> nombresAzules){
         this.getComboAtacarDestino().removeAllItems();
 
         for (int i = 0; i <nombresAzules.size(); i++) {
             this.getComboAtacarDestino().addItem(nombresAzules.get(i));
+        }
+    }
+
+    public void setCboMoverNumero(Integer n){
+        this.getComboMoverNumero().removeAllItems();
+
+        for (int i = 0; i <n; i++) {
+            this.getComboMoverNumero().addItem(i+1);
         }
     }
 
@@ -238,4 +261,11 @@ public class Ventana extends JFrame {
         this.comboAtacarDestino = comboAtacarDestino;
     }
 
+    public JComboBox<Integer> getComboMoverNumero() {
+        return comboMoverNumero;
+    }
+
+    public void setComboMoverNumero(JComboBox<Integer> comboMoverNumero) {
+        this.comboMoverNumero = comboMoverNumero;
+    }
 }

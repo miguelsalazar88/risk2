@@ -3,6 +3,7 @@ package modelo;
 import vista.Ventana;
 
 import javax.swing.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -23,8 +24,50 @@ public class Modelo {
         this.ventana.getPanel().setTerritoriosVista(territoriosModelo);
     }
 
-    public void moverTropas() {
+    public void moverTropas(String origen, String destino, int num) {
 
+        int idOrigen = -1;
+        int idDestino = -1;
+
+        for (int i = 0; i < territoriosModelo.size(); i++) {
+            if(territoriosModelo.get(i).getNombre().equals(origen)){
+                idOrigen = i;
+            }
+            else if(territoriosModelo.get(i).getNombre().equals(destino)){
+                    idDestino = i;
+            }
+
+        }
+
+        if(territoriosModelo.get(idOrigen).getSoldados()==1){
+            JOptionPane.showMessageDialog(null,"No puedes dejar terrotorios sin tropas");
+            this.ventana.getPanel().setTerritoriosVista(territoriosModelo);
+            this.ventana.getPanel().repaint();
+
+        }
+
+        else {
+
+            territoriosModelo.get(idOrigen).setSoldados(territoriosModelo.get(idOrigen).getSoldados() - num);
+            this.ventana.setCboMoverNumero(territoriosModelo.get(idOrigen).getSoldados());
+            territoriosModelo.get(idDestino).setSoldados(territoriosModelo.get(idDestino).getSoldados() + num);
+            this.ventana.getPanel().setTerritoriosVista(territoriosModelo);
+            this.ventana.getPanel().repaint();
+        }
+
+    }
+
+    public Integer setMoverNumero(String origen){
+
+        Integer n = 0;
+
+        for (int i = 0; i < this.territoriosModelo.size(); i++) {
+            if(this.territoriosModelo.get(i).getNombre().equals(origen)){
+                 n = this.territoriosModelo.get(i).getSoldados()-1;
+            }
+        }
+
+        return n;
     }
 
     //Setea el comboBox de la ventana para que vea las opciones de origen
@@ -38,6 +81,19 @@ public class Modelo {
             }
         }
         return nombresRojos;
+    }
+
+    public ArrayList<String> setMoverDestino(String origen){
+        ArrayList<String> moverDestino = new ArrayList<>();
+
+        for (int i = 0; i < territoriosModelo.size(); i++) {
+            if(territoriosModelo.get(i).getNombre().equals(origen)){
+                moverDestino.addAll(territoriosModelo.get(i).buscarCaminos());
+            }
+        }
+
+        return moverDestino;
+
     }
 
     //Setea el comboBox de la ventana para que se vean las opciones de ataque posibles.

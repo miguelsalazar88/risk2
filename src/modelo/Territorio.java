@@ -29,18 +29,24 @@ public class Territorio {
         this.vecinos.add(vecino);
     }
 
-    public ArrayList<String> buscarCaminos(ArrayList<String> caminos){
+    public ArrayList<String> buscarCaminos(){
         this.visitado = true;
 
-        for (int i = 0; i < this.getVecinos().size(); i++) {
-            if(!this.getVecinos().get(i).isVisitado()
-                    && this.getVecinos().get(i).getPertenece() == this.pertenece){
-                this.getVecinos().get(i).visitado = true;
+        ArrayList<String> caminos = new ArrayList<>();
+
+
+        for (int i = 0; i <this.getVecinos().size() ; i++) {
+            if(this.getVecinos().get(i).getPertenece() == this.getPertenece()
+                    && !this.getVecinos().get(i).isVisitado()){
+                this.getVecinos().get(i).setVisitado(true);
                 caminos.add(this.getVecinos().get(i).getNombre());
-                this.getVecinos().get(i).buscarCaminos(caminos);
+                caminos.addAll(this.getVecinos().get(i).buscarCaminos());
+
             }
         }
+
         return caminos;
+
     }
 
     //Getters y Setters
