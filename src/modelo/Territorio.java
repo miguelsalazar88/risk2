@@ -34,7 +34,6 @@ public class Territorio {
 
         ArrayList<String> caminos = new ArrayList<>();
 
-
         for (int i = 0; i <this.getVecinos().size() ; i++) {
             if(this.getVecinos().get(i).getPertenece() == this.getPertenece()
                     && !this.getVecinos().get(i).isVisitado()){

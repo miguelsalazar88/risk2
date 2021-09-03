@@ -157,8 +157,8 @@ public class Ventana extends JFrame {
     public void setCboMoverDestino (ArrayList<String> destinos){
 
         if(destinos.isEmpty()){
-
         }
+
         else{
             this.comboMoverDestino.removeAllItems();
             for (int i = 0; i < destinos.size(); i++) {

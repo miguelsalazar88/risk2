@@ -55,6 +55,10 @@ public class Modelo {
             this.ventana.getPanel().repaint();
         }
 
+        territoriosModelo.stream().forEach(t -> t.setVisitado(false));
+        this.ventana.getPanel().setTerritoriosVista(territoriosModelo);
+        this.ventana.getPanel().repaint();
+
     }
 
     public Integer setMoverNumero(String origen){
