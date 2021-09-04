@@ -173,6 +173,7 @@ public class Ventana extends JFrame {
 
         for (int i = 0; i <nombresAzules.size(); i++) {
             this.getComboAtacarDestino().addItem(nombresAzules.get(i));
+            System.out.println("Esta es una pueba para ver que pasa con git");
         }
     }
 
