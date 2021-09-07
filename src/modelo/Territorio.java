@@ -40,7 +40,6 @@ public class Territorio {
                 this.getVecinos().get(i).setVisitado(true);
                 caminos.add(this.getVecinos().get(i).getNombre());
                 caminos.addAll(this.getVecinos().get(i).buscarCaminos());
-
             }
         }
 

@@ -15,10 +15,6 @@ public class App {
         Modelo m = new Modelo(v);
         Controller c = new Controller(v,m);
 
-       /*ArrayList<String> prueba = new ArrayList<String>();
-       m.getTerritoriosModelo().get(0).buscarCaminos(prueba);
-        System.out.println("Origen: " + m.getTerritoriosModelo().get(0).getNombre());
-        System.out.println("Amiguitos: " + prueba);*/
     }
 
 }
